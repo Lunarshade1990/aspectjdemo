@@ -6,9 +6,11 @@ import org.springframework.stereotype.Component;
 public class MembershipDAO {
     public void addMember() {
         System.out.println(getClass().getSimpleName()+ ": Doing my db work at member...!");
+        System.out.println();
     }
 
     public void doWork() {
         System.out.println(getClass().getSimpleName()+ ": Doing my work...!");
+        System.out.println();
     }
 }

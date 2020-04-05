@@ -5,18 +5,21 @@ import com.lunarshade.aopdemo.dao.MembershipDAO;
 import com.lunarshade.aopdemo.entity.Account;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainDemoApp {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoDemoConfig.class);
         AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
-        MembershipDAO membershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
-        Account account = new Account();
-        accountDAO.addAccount(account, false);
-        accountDAO.setName("John");
-        accountDAO.getName();
-        membershipDAO.addMember();
-        membershipDAO.doWork();
+        List<Account> accounts;
+        try {
+            boolean flag = true;
+            accounts = accountDAO.findAccounts(flag);
+        } catch (Exception e) {
+            System.out.println("Main program. Catch Exception: " + e);
+        }
         context.close();
     }
 }
