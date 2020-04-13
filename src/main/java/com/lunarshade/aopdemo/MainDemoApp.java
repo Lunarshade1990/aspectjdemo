@@ -15,7 +15,7 @@ public class MainDemoApp {
         AccountDAO accountDAO = context.getBean("accountDAO", AccountDAO.class);
         List<Account> accounts;
         try {
-            boolean flag = true;
+            boolean flag = false;
             accounts = accountDAO.findAccounts(flag);
         } catch (Exception e) {
             System.out.println("Main program. Catch Exception: " + e);

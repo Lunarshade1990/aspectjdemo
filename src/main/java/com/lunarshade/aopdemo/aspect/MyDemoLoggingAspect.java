@@ -2,10 +2,7 @@ package com.lunarshade.aopdemo.aspect;
 
 import com.lunarshade.aopdemo.entity.Account;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -42,8 +39,14 @@ public class MyDemoLoggingAspect {
         System.out.println("======>>> Executing @AfterReturning onMethod: " + method);
         System.out.println("======>>> Result is: " + result);
 
-       convertAccountNamesToApperCase(result);
+       convertAccountNamesToUpperCase(result);
         System.out.println("======>>> New result is: " + result);
+    }
+
+    @After("com.lunarshade.aopdemo.aspect.AopExpressions.forDaoPackageNoGettersAndSetters()")
+    public void afterAccountAdvise(JoinPoint joinPoint) {
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("======>>> Executing @AfterOnMethod");
     }
 
     @AfterThrowing(pointcut = "com.lunarshade.aopdemo.aspect.AopExpressions.forDaoPackageNoGettersAndSetters()",
@@ -53,7 +56,7 @@ public class MyDemoLoggingAspect {
         System.out.println("======>>> Executing @AfterThrowing onMethod: " + exeption);
     }
 
-    private void convertAccountNamesToApperCase(List<Account> accounts) {
+    private void convertAccountNamesToUpperCase(List<Account> accounts) {
         accounts.stream()
                 .forEach(account -> {
                     account.setName(account.getName().toUpperCase());
