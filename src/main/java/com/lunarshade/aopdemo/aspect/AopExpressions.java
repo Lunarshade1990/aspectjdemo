@@ -18,4 +18,9 @@ public class AopExpressions {
 
     @Pointcut("forDaoPackage() && !(getPointcut() || setPointcut())")
     void forDaoPackageNoGettersAndSetters () {};
+
+    //Create pointcuts for getters and setters
+    @Pointcut("execution(* com.lunarshade.aopdemo.service.*.*(..))")
+    void getTrafficFortuneServicePointcut() {}
+
 }

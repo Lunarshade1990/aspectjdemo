@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(1)
+@Order(3)
 public class MyCloudLogAsyncAspect {
 
     @Before("com.lunarshade.aopdemo.aspect.AopExpressions.forDaoPackage()")
